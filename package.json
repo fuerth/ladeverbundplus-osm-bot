@@ -1,0 +1,24 @@
+{
+  "name": "ladeverbundplus-osm-bot",
+  "version": "0.0.1",
+  "description": "A bot that collects data from ladeverbundplus.de and updates it in openstreetmap",
+  "main": "scripts/index.js",
+  "scripts": {
+    "start": "node scripts/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mojoaxel/ladeverbundplus-osm-bot.git"
+  },
+  "keywords": [
+    "osm",
+    "e-bike",
+    "bot"
+  ],
+  "author": "Alexander Wunschik <osm@wunschik.net>",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/mojoaxel/ladeverbundplus-osm-bot/issues"
+  },
+  "homepage": "https://github.com/mojoaxel/ladeverbundplus-osm-bot#readme"
+}
