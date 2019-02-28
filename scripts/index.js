@@ -3,7 +3,8 @@ const path = require('path');
 
 const getStations = require('./ladeverbundplus');
 
-const OUTPUT_OSM = path.resolve(__dirname, '../data/osm_data.json');
+const OUTPUT_DIR = path.resolve(__dirname, '../data/');
+const OUTPUT_OSM = path.resolve(OUTPUT_DIR, 'osm_data.json');
 
 // see https://stackoverflow.com/a/38340730/722162
 const removeEmpty = (obj) => {
@@ -60,6 +61,11 @@ function genOSMNodes(stations) {
 }
 
 (async () => {
+	// make sure output dir exists
+	if (!fs.existsSync(OUTPUT_DIR)){
+		fs.mkdirSync(OUTPUT_DIR);
+	}
+
 	var stations;
 	stations = await getStations();
 	const osmNodes = genOSMNodes(stations);
