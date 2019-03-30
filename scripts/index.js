@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+const GeoJSON = require('geojson');
 
 const getStations = require('./ladeverbundplus');
 
 const OUTPUT_DIR = path.resolve(__dirname, '../data/');
 const OUTPUT_OSM = path.resolve(OUTPUT_DIR, 'osm_data.json');
+const OUTPUT_GEOJSON = path.resolve(OUTPUT_DIR, 'ladeverbundplus.geojson');
 
 // see https://stackoverflow.com/a/38340730/722162
 const removeEmpty = (obj) => {
@@ -68,11 +70,20 @@ function genOSMNodes(stations) {
 
 	var stations;
 	stations = await getStations();
-	const osmNodes = genOSMNodes(stations);
 	
+	const osmNodes = genOSMNodes(stations);
 	fs.writeFile(OUTPUT_OSM, JSON.stringify(osmNodes, null, '\t'), function(err) {
 		if (err) return console.error(err);
 		console.log(`Wrote OSM-data to ${OUTPUT_OSM}`);
+	});
+
+	const geojson = GeoJSON.parse(stations, {
+		Point: ['latitude', 'longitude'],
+		include: [ "uid", "title",  "address", "zip", "city", "locationNote", "rateTitle", "operator", "operatorInternet", "greenpower", "allday", "openingtimes", "parkinglot", "parkinginfo" ]
+	});
+	fs.writeFile(OUTPUT_GEOJSON, JSON.stringify(geojson, null, '\t'), function(err) {
+		if (err) return console.error(err);
+		console.log(`Wrote GEO.JSON-data to ${OUTPUT_GEOJSON}`);
 	});
 })();
 
