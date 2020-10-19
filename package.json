@@ -4,8 +4,7 @@
   "description": "A bot that collects data from ladeverbundplus.de and updates it in openstreetmap",
   "main": "scripts/index.js",
   "scripts": {
-    "start": "node scripts/index.js",
-    "geojson": "node scripts/geojson.js"
+    "start": "node scripts/index.js"
   },
   "repository": {
     "type": "git",
